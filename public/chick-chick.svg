@@ -1,0 +1,97 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400" width="600" height="400">
+  <defs>
+    <linearGradient id="ckBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#7C2D12;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#C2410C;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#F4A261;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="ckNode" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FED7AA"/>
+      <stop offset="100%" style="stop-color:#F4A261"/>
+    </linearGradient>
+    <filter id="ckGlow">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- Card background -->
+  <rect width="600" height="400" rx="16" fill="url(#ckBg)"/>
+
+  <!-- Subtle nested egg rings — meta/recursive motif -->
+  <ellipse cx="300" cy="200" rx="250" ry="170" fill="none" stroke="#FED7AA" stroke-width="0.5" opacity="0.06"/>
+  <ellipse cx="300" cy="200" rx="200" ry="135" fill="none" stroke="#FED7AA" stroke-width="0.5" opacity="0.05"/>
+  <ellipse cx="300" cy="200" rx="150" ry="100" fill="none" stroke="#FED7AA" stroke-width="0.5" opacity="0.04"/>
+
+  <!-- Researcher 1 (top-left) -->
+  <circle cx="80" cy="120" r="25" fill="url(#ckNode)" opacity="0.85"/>
+  <circle cx="80" cy="120" r="15" fill="#C2410C"/>
+  <!-- Magnifying glass icon -->
+  <circle cx="78" cy="118" r="6" fill="none" stroke="white" stroke-width="1.8" opacity="0.9"/>
+  <line x1="82" y1="123" x2="87" y2="128" stroke="white" stroke-width="1.8" stroke-linecap="round" opacity="0.9"/>
+
+  <!-- Researcher 2 (bottom-left) -->
+  <circle cx="80" cy="240" r="25" fill="url(#ckNode)" opacity="0.85"/>
+  <circle cx="80" cy="240" r="15" fill="#C2410C"/>
+  <!-- Magnifying glass icon -->
+  <circle cx="78" cy="238" r="6" fill="none" stroke="white" stroke-width="1.8" opacity="0.9"/>
+  <line x1="82" y1="243" x2="87" y2="248" stroke="white" stroke-width="1.8" stroke-linecap="round" opacity="0.9"/>
+
+  <!-- Parallel bracket for researchers -->
+  <rect x="52" y="90" width="56" height="180" rx="8" fill="none" stroke="#FED7AA" stroke-width="1" stroke-dasharray="3 3" opacity="0.15"/>
+  <text x="80" y="82" text-anchor="middle" font-family="monospace" font-size="7" fill="#FED7AA" opacity="0.35">x2</text>
+
+  <!-- Arrows: Researchers → Synthesizer -->
+  <line x1="105" y1="130" x2="185" y2="168" stroke="#FED7AA" stroke-width="2" stroke-dasharray="5 3" opacity="0.5"/>
+  <polygon points="182,163 192,168 184,174" fill="#FED7AA" opacity="0.5"/>
+  <line x1="105" y1="230" x2="185" y2="192" stroke="#FED7AA" stroke-width="2" stroke-dasharray="5 3" opacity="0.5"/>
+  <polygon points="182,186 192,192 184,198" fill="#FED7AA" opacity="0.5"/>
+
+  <text x="148" y="162" text-anchor="middle" font-family="monospace" font-size="7" fill="#FED7AA" opacity="0.45">research</text>
+
+  <!-- Synthesizer (center-left) -->
+  <circle cx="220" cy="180" r="30" fill="#E76F51" opacity="0.95" filter="url(#ckGlow)"/>
+  <circle cx="220" cy="180" r="19" fill="#7C2D12"/>
+  <!-- Brain/merge icon -->
+  <path d="M 213 175 Q 213 170 218 170 Q 222 170 222 175 Q 226 170 226 175 Q 226 180 220 185 Q 213 180 213 175 Z" fill="white" opacity="0.9"/>
+
+  <!-- Arrow: Synthesizer → Builder -->
+  <line x1="250" y1="180" x2="325" y2="180" stroke="#FED7AA" stroke-width="2" stroke-dasharray="5 3" opacity="0.5"/>
+  <polygon points="322,175 332,180 322,185" fill="#FED7AA" opacity="0.5"/>
+
+  <text x="290" y="172" text-anchor="middle" font-family="monospace" font-size="7" fill="#FED7AA" opacity="0.45">brief</text>
+
+  <!-- Builder (center-right) -->
+  <rect x="335" y="155" width="60" height="50" rx="10" fill="#7C2D12" opacity="0.9"/>
+  <!-- Code/scaffold lines -->
+  <line x1="348" y1="170" x2="382" y2="170" stroke="#FED7AA" stroke-width="2" opacity="0.7" stroke-linecap="round"/>
+  <line x1="348" y1="178" x2="375" y2="178" stroke="#F4A261" stroke-width="2" opacity="0.6" stroke-linecap="round"/>
+  <line x1="348" y1="186" x2="380" y2="186" stroke="#FED7AA" stroke-width="2" opacity="0.5" stroke-linecap="round"/>
+  <line x1="348" y1="194" x2="370" y2="194" stroke="#F4A261" stroke-width="1.5" opacity="0.4" stroke-linecap="round"/>
+
+  <!-- Arrow: Builder → Reviewer -->
+  <line x1="395" y1="180" x2="460" y2="180" stroke="#FED7AA" stroke-width="2" stroke-dasharray="5 3" opacity="0.5"/>
+  <polygon points="457,175 467,180 457,185" fill="#FED7AA" opacity="0.5"/>
+
+  <text x="430" y="172" text-anchor="middle" font-family="monospace" font-size="7" fill="#FED7AA" opacity="0.45">review</text>
+
+  <!-- Reviewer (right) -->
+  <circle cx="500" cy="180" r="30" fill="#E76F51" opacity="0.95" filter="url(#ckGlow)"/>
+  <circle cx="500" cy="180" r="19" fill="#7C2D12"/>
+  <!-- Checkmark icon -->
+  <polyline points="490,180 497,187 512,172" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none" opacity="0.95"/>
+
+  <!-- Node labels -->
+  <text x="80" y="158" text-anchor="middle" font-family="sans-serif" font-size="10" fill="white" opacity="0.8">Researchers</text>
+  <text x="220" y="225" text-anchor="middle" font-family="sans-serif" font-size="10" fill="white" opacity="0.8">Synthesizer</text>
+  <text x="365" y="222" text-anchor="middle" font-family="sans-serif" font-size="10" fill="white" opacity="0.8">Builder</text>
+  <text x="500" y="225" text-anchor="middle" font-family="sans-serif" font-size="10" fill="white" opacity="0.8">Reviewer</text>
+
+  <!-- Floating decorative dots -->
+  <circle cx="50" cy="50" r="3" fill="#FED7AA" opacity="0.3"/>
+  <circle cx="550" cy="60" r="2.5" fill="#FED7AA" opacity="0.25"/>
+  <circle cx="40" cy="340" r="2" fill="#FED7AA" opacity="0.2"/>
+  <circle cx="560" cy="340" r="3" fill="#FED7AA" opacity="0.2"/>
+  <circle cx="300" cy="50" r="2" fill="#FED7AA" opacity="0.25"/>
+  <circle cx="300" cy="350" r="2.5" fill="#FED7AA" opacity="0.2"/>
+</svg>

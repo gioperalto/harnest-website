@@ -79,7 +79,7 @@ export default function Footer() {
 
       <style>{`
         .footer-section {
-          background: var(--bg-dark);
+          background: #011d42;
         }
 
         /* CTA Banner */

@@ -38,6 +38,7 @@ export default function Hero() {
               <a href="#features">Features</a>
               <a href="#chicks">Chicks</a>
               <a href="#how-it-works">How it works</a>
+              <a href="#canary">Canary</a>
               <a
                 href="https://github.com/gioperalto/harnest"
                 target="_blank"
@@ -421,6 +422,14 @@ export default function Hero() {
             display: none;
           }
 
+          .hero-title {
+            font-size: clamp(1.6rem, 7vw, 2.5rem);
+          }
+
+          .hero-title br {
+            display: none;
+          }
+
           .hero-stats {
             gap: 20px;
           }
@@ -439,6 +448,10 @@ export default function Hero() {
           .hero-content {
             padding-top: 28px;
             padding-bottom: 48px;
+          }
+
+          .hero-title {
+            font-size: clamp(1.4rem, 6.5vw, 2rem);
           }
 
           .stat-divider {

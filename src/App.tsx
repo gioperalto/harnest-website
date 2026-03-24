@@ -5,6 +5,7 @@ import Features from './components/Features'
 import ChicksShowcase from './components/ChicksShowcase'
 import HowItWorks from './components/HowItWorks'
 import QuickStart from './components/QuickStart'
+import Canary from './components/Canary'
 import Footer from './components/Footer'
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
       <ChicksShowcase />
       <HowItWorks />
       <QuickStart />
+      <Canary />
       <Footer />
     </>
   )

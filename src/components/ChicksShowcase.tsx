@@ -6,6 +6,8 @@ import type { ChickData } from '../data/chicks.generated'
 const visualConfig: Record<string, { emoji: string; color: string; lightColor: string }> = {
   fullstack: { emoji: '🏗️', color: '#0077B6', lightColor: '#F0F7FF' },
   webpage: { emoji: '🎨', color: '#00B4D8', lightColor: '#F0FBFF' },
+  brainstorm: { emoji: '💡', color: '#6C63FF', lightColor: '#F5F4FF' },
+  canary: { emoji: '🐤', color: '#2A9D8F', lightColor: '#F0FAF8' },
   chick: { emoji: '🥚', color: '#F4A261', lightColor: '#FFF8F0' },
 }
 
@@ -51,6 +53,11 @@ const roleIcons: Record<string, string> = {
   researcher: '🔍',
   synthesizer: '🧬',
   reviewer: '📋',
+  facilitator: '🎯',
+  explorer: '🧭',
+  provocateur: '⚡',
+  validator: '✅',
+  observer: '👁️',
 }
 
 function getRoleIcon(id: string): string {
