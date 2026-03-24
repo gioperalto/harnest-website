@@ -17,7 +17,7 @@ const steps = [
     number: '03',
   },
   {
-    command: 'harnest hatch',
+    command: 'harnest hatch --chick fullstack',
     annotation: 'Scaffold a chick into your project — then open Claude Code',
     number: '04',
   },

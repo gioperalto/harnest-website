@@ -3,6 +3,8 @@
 .mcp.json
 nest/**/claude/settings.local.json
 harnest-test-*/
+dist/
+src/data/chicks.generated.ts
 .DS_Store
 Thumbs.db
 *.swp

@@ -1,37 +1,123 @@
-const chicks = [
-  {
-    id: 'fullstack',
-    name: 'Fullstack',
-    emoji: '🏗️',
-    tagline: 'Build complete features end to end',
-    description:
-      'A full engineering team in your terminal. The architect plans, senior engineers implement, juniors assist, and the test engineer verifies — all running in parallel.',
-    roles: [
-      { name: 'Architect', icon: '🧠', model: 'opus' },
-      { name: 'Sr. Engineer', icon: '💻', model: 'sonnet' },
-      { name: 'Jr. Engineer', icon: '⌨️', model: 'haiku' },
-      { name: 'Test Engineer', icon: '🧪', model: 'sonnet' },
-    ],
-    color: '#0077B6',
-    lightColor: '#F0F7FF',
-  },
-  {
-    id: 'webpage',
-    name: 'Webpage',
-    emoji: '🎨',
-    tagline: 'Design and ship polished web pages',
-    description:
-      'A creative web team. The strategist interviews you, the artist generates images, the builder codes the React site, and the UX tester signs off before shipping.',
-    roles: [
-      { name: 'Strategist', icon: '🎯', model: 'opus' },
-      { name: 'Artist', icon: '🖼️', model: 'sonnet' },
-      { name: 'Builder', icon: '🔨', model: 'sonnet' },
-      { name: 'UX Tester', icon: '🔬', model: 'sonnet' },
-    ],
-    color: '#00B4D8',
-    lightColor: '#F0FBFF',
-  },
+import { chicksData } from '../data/chicks.generated'
+import type { ChickData } from '../data/chicks.generated'
+
+// ── Visual config (colors, emojis) for known chicks with sensible defaults ──
+
+const visualConfig: Record<string, { emoji: string; color: string; lightColor: string }> = {
+  fullstack: { emoji: '🏗️', color: '#0077B6', lightColor: '#F0F7FF' },
+  webpage: { emoji: '🎨', color: '#00B4D8', lightColor: '#F0FBFF' },
+  chick: { emoji: '🥚', color: '#F4A261', lightColor: '#FFF8F0' },
+}
+
+const defaultColors = [
+  { color: '#6C63FF', lightColor: '#F5F4FF' },
+  { color: '#E63946', lightColor: '#FFF0F1' },
+  { color: '#2A9D8F', lightColor: '#F0FAF8' },
+  { color: '#E9C46A', lightColor: '#FFFCF0' },
 ]
+
+function getVisual(id: string, index: number) {
+  if (visualConfig[id]) return visualConfig[id]
+  const fallback = defaultColors[index % defaultColors.length]
+  return { emoji: '🐣', ...fallback }
+}
+
+// ── Display name formatting ─────────────────────────────────────────────────
+
+const roleDisplayNames: Record<string, string> = {
+  sr_engineer: 'Sr. Engineer',
+  jr_engineer: 'Jr. Engineer',
+  test_engineer: 'Test Engineer',
+  ux_tester: 'UX Tester',
+}
+
+function formatRoleName(id: string): string {
+  if (roleDisplayNames[id]) return roleDisplayNames[id]
+  return id
+    .split('_')
+    .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
+    .join(' ')
+}
+
+const roleIcons: Record<string, string> = {
+  architect: '🧠',
+  sr_engineer: '💻',
+  jr_engineer: '⌨️',
+  test_engineer: '🧪',
+  strategist: '🎯',
+  artist: '🖼️',
+  builder: '🔨',
+  ux_tester: '🔬',
+  researcher: '🔍',
+  synthesizer: '🧬',
+  reviewer: '📋',
+}
+
+function getRoleIcon(id: string): string {
+  return roleIcons[id] || '🤖'
+}
+
+function formatChickName(id: string): string {
+  return id.charAt(0).toUpperCase() + id.slice(1)
+}
+
+// ── Component ───────────────────────────────────────────────────────────────
+
+function ChickCard({ chick, index }: { chick: ChickData; index: number }) {
+  const visual = getVisual(chick.id, index)
+  const displayName = formatChickName(chick.id)
+
+  return (
+    <div className="chick-card">
+      <div
+        className="chick-card-hero"
+        style={{ background: `linear-gradient(135deg, ${visual.color}22, ${visual.color}44)` }}
+      >
+        <img
+          src={`/chick-${chick.id}.svg`}
+          alt={`${displayName} chick illustration`}
+          style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+          onError={(e) => {
+            ;(e.target as HTMLImageElement).style.display = 'none'
+          }}
+        />
+        <div className="chick-emoji-badge">{visual.emoji}</div>
+      </div>
+
+      <div className="chick-card-body">
+        <div className="chick-card-header">
+          <h3 className="chick-name">{displayName}</h3>
+          <span className="chick-tag" style={{ background: `${visual.color}18`, color: visual.color }}>
+            chick
+          </span>
+        </div>
+        <p className="chick-desc">{chick.description}</p>
+
+        <div className="chick-roles">
+          <p className="roles-label">Team composition</p>
+          <div className="roles-grid">
+            {chick.agents.map((agent) => (
+              <div key={agent.id} className="role-chip">
+                <span className="role-icon">{getRoleIcon(agent.id)}</span>
+                <div className="role-info">
+                  <span className="role-name">
+                    {formatRoleName(agent.id)}
+                    {agent.count > 1 && <span className="role-count"> x{agent.count}</span>}
+                  </span>
+                  <span className="role-model">{agent.model}</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="chick-footer">
+          <code className="chick-command">harnest hatch --chick {chick.id}</code>
+        </div>
+      </div>
+    </div>
+  )
+}
 
 export default function ChicksShowcase() {
   return (
@@ -46,52 +132,9 @@ export default function ChicksShowcase() {
           </p>
         </div>
 
-        <div className="chicks-grid">
-          {chicks.map((chick) => (
-            <div key={chick.id} className="chick-card">
-              {/* Card image area */}
-              <div
-                className="chick-card-hero"
-                style={{ background: `linear-gradient(135deg, ${chick.color}22, ${chick.color}44)` }}
-              >
-                <img
-                  src={`/chick-${chick.id}.svg`}
-                  alt={`${chick.name} chick illustration`}
-                  style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-                />
-                <div className="chick-emoji-badge">{chick.emoji}</div>
-              </div>
-
-              <div className="chick-card-body">
-                <div className="chick-card-header">
-                  <h3 className="chick-name">{chick.name}</h3>
-                  <span className="chick-tag" style={{ background: `${chick.color}18`, color: chick.color }}>
-                    chick
-                  </span>
-                </div>
-                <p className="chick-tagline">{chick.tagline}</p>
-                <p className="chick-desc">{chick.description}</p>
-
-                <div className="chick-roles">
-                  <p className="roles-label">Team composition</p>
-                  <div className="roles-grid">
-                    {chick.roles.map((role) => (
-                      <div key={role.name} className="role-chip">
-                        <span className="role-icon">{role.icon}</span>
-                        <div className="role-info">
-                          <span className="role-name">{role.name}</span>
-                          <span className="role-model">{role.model}</span>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                <div className="chick-footer">
-                  <code className="chick-command">harnest hatch {chick.id}</code>
-                </div>
-              </div>
-            </div>
+        <div className="chicks-grid" style={chicksData.length % 2 !== 0 ? { gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))' } : undefined}>
+          {chicksData.map((chick, i) => (
+            <ChickCard key={chick.id} chick={chick} index={i} />
           ))}
         </div>
 
@@ -199,13 +242,6 @@ export default function ChicksShowcase() {
           border-radius: 100px;
         }
 
-        .chick-tagline {
-          font-size: 1rem;
-          color: var(--text-muted);
-          margin-bottom: 12px;
-          font-weight: 500;
-        }
-
         .chick-desc {
           font-size: 0.9rem;
           color: var(--text-muted);
@@ -257,6 +293,12 @@ export default function ChicksShowcase() {
           font-weight: 600;
           color: var(--text-dark);
           line-height: 1;
+        }
+
+        .role-count {
+          font-size: 0.75rem;
+          font-weight: 500;
+          color: var(--text-muted);
         }
 
         .role-model {
@@ -312,7 +354,7 @@ export default function ChicksShowcase() {
 
         @media (max-width: 900px) {
           .chicks-grid {
-            grid-template-columns: 1fr;
+            grid-template-columns: 1fr !important;
             max-width: 540px;
             margin-left: auto;
             margin-right: auto;
@@ -336,4 +378,3 @@ export default function ChicksShowcase() {
     </section>
   )
 }
-

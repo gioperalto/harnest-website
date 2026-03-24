@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from 'react'
 const steps = [
   {
     id: 1,
-    command: 'harnest hatch',
+    command: 'harnest hatch --chick fullstack',
     label: 'Hatch',
     description: 'Run one command to scaffold the team config into your project. Harnest writes harnest.yaml and sets up agent definitions.',
     icon: '🥚',
