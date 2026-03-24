@@ -90,22 +90,6 @@ export default function Hero() {
           </button>
         </div>
 
-        <div className="hero-stats">
-          <div className="stat">
-            <span className="stat-value">2</span>
-            <span className="stat-label">Chicks available</span>
-          </div>
-          <div className="stat-divider" />
-          <div className="stat">
-            <span className="stat-value">1</span>
-            <span className="stat-label">Command to start</span>
-          </div>
-          <div className="stat-divider" />
-          <div className="stat">
-            <span className="stat-value">∞</span>
-            <span className="stat-label">Parallel agents</span>
-          </div>
-        </div>
       </div>
 
       <div className="hero-scroll-indicator">
@@ -295,6 +279,8 @@ export default function Hero() {
           margin-bottom: 24px;
           animation: fadeInUp 0.6s ease 0.1s both;
           letter-spacing: -0.02em;
+          width: 100%;
+          overflow-wrap: break-word;
         }
 
         .hero-title-highlight {
@@ -307,6 +293,7 @@ export default function Hero() {
         .hero-subtitle {
           font-size: clamp(1rem, 2vw, 1.25rem);
           color: rgba(255, 255, 255, 0.82);
+          width: 100%;
           max-width: 580px;
           margin-bottom: 40px;
           animation: fadeInUp 0.6s ease 0.2s both;
@@ -335,8 +322,9 @@ export default function Hero() {
           color: rgba(255, 255, 255, 0.8);
           margin-bottom: 48px;
           animation: fadeInUp 0.6s ease 0.4s both;
-          max-width: 100%;
-          overflow-x: auto;
+          width: 100%;
+          max-width: 580px;
+          overflow: hidden;
           backdrop-filter: blur(8px);
         }
 
@@ -348,6 +336,10 @@ export default function Hero() {
 
         .install-cmd {
           white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          min-width: 0;
+          flex: 1;
         }
 
         .install-copy {
@@ -417,6 +409,13 @@ export default function Hero() {
           animation: pulse 2s ease-in-out infinite;
         }
 
+        @media (max-width: 768px) {
+          .hero-content {
+            padding-top: 40px;
+            padding-bottom: 60px;
+          }
+        }
+
         @media (max-width: 600px) {
           .nav-links {
             display: none;
@@ -427,18 +426,33 @@ export default function Hero() {
           }
 
           .hero-install-preview {
-            font-size: 0.7rem;
+            font-size: 0.75rem;
+            padding: 10px 14px;
+          }
+
+          .install-cmd {
+            min-width: 0;
           }
         }
 
         @media (max-width: 480px) {
+          .hero-content {
+            padding-top: 28px;
+            padding-bottom: 48px;
+          }
+
           .stat-divider {
             display: none;
           }
 
           .hero-stats {
             flex-wrap: wrap;
+            justify-content: center;
             gap: 16px;
+          }
+
+          .hero-install-preview {
+            font-size: 0.68rem;
           }
         }
       `}</style>
