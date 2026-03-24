@@ -3,10 +3,11 @@ import { useState } from 'react'
 export default function Hero() {
   const [copied, setCopied] = useState(false)
 
-  const installCmd = 'brew tap gioperalto/harnest && brew install harnest'
+  const tapCmd = 'brew tap gioperalto/harnest'
+  const installCmd = 'brew install harnest'
 
   const handleCopy = () => {
-    navigator.clipboard.writeText(installCmd)
+    navigator.clipboard.writeText(`${tapCmd}\n${installCmd}`)
     setCopied(true)
     setTimeout(() => setCopied(false), 2000)
   }
@@ -83,12 +84,18 @@ export default function Hero() {
           </a>
         </div>
 
-        <div className="hero-install-preview">
-          <span className="install-prompt">$</span>
-          <span className="install-cmd">brew tap gioperalto/harnest &amp;&amp; brew install harnest</span>
-          <button className="install-copy" onClick={handleCopy} title="Copy to clipboard">
-            {copied ? '✓' : '⎘'}
-          </button>
+        <div className="hero-install-wrappers">
+          <div className="hero-install-preview">
+            <span className="install-prompt">$</span>
+            <span className="install-cmd">{tapCmd}</span>
+          </div>
+          <div className="hero-install-preview">
+            <span className="install-prompt">$</span>
+            <span className="install-cmd">{installCmd}</span>
+            <button className="install-copy" onClick={handleCopy} title="Copy to clipboard">
+              {copied ? '✓' : '⎘'}
+            </button>
+          </div>
         </div>
 
       </div>
@@ -310,6 +317,16 @@ export default function Hero() {
           justify-content: center;
         }
 
+        .hero-install-wrappers {
+          display: flex;
+          flex-direction: column;
+          gap: 8px;
+          width: 100%;
+          max-width: 580px;
+          margin-bottom: 48px;
+          animation: fadeInUp 0.6s ease 0.4s both;
+        }
+
         .hero-install-preview {
           display: flex;
           align-items: center;
@@ -321,10 +338,6 @@ export default function Hero() {
           font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
           font-size: 0.85rem;
           color: rgba(255, 255, 255, 0.8);
-          margin-bottom: 48px;
-          animation: fadeInUp 0.6s ease 0.4s both;
-          width: 100%;
-          max-width: 580px;
           overflow: hidden;
           backdrop-filter: blur(8px);
         }
@@ -437,10 +450,6 @@ export default function Hero() {
           .hero-install-preview {
             font-size: 0.75rem;
             padding: 10px 14px;
-          }
-
-          .install-cmd {
-            min-width: 0;
           }
         }
 
