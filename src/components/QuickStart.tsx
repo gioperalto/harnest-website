@@ -17,8 +17,8 @@ const steps = [
     number: '03',
   },
   {
-    command: 'harnest hatch --chick fullstack',
-    annotation: 'Scaffold a chick into your project — then open Claude Code',
+    command: 'harnest hatch',
+    annotation: 'Scaffold a chick into your project (defaults to fullstack) — then open Claude Code',
     number: '04',
   },
 ]
@@ -103,7 +103,7 @@ export default function QuickStart() {
               ))}
 
               <div className="terminal-output">
-                <span className="t-output-line">🪺 Hatching webpage chick into your project...</span>
+                <span className="t-output-line">🪺 Hatching fullstack chick into your project...</span>
                 <span className="t-output-line">✓ Created harnest.yaml</span>
                 <span className="t-output-line">✓ Created .claude/agents/</span>
                 <span className="t-output-line success">🐣 Done! Open Claude Code to hatch your team.</span>

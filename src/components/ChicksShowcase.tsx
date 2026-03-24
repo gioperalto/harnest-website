@@ -142,7 +142,7 @@ export default function ChicksShowcase() {
           <div className="more-card">
             <span className="more-icon">🐥</span>
             <h3>More chicks coming soon</h3>
-            <p>Data pipeline, API service, mobile app... the flock is growing.</p>
+            <p>The flock is growing.</p>
             <a
               href="https://github.com/gioperalto/harnest"
               target="_blank"

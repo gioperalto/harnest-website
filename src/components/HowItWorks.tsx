@@ -106,7 +106,6 @@ export default function HowItWorks() {
                     <div className="step-info">
                       <span className="step-number">Step {step.id}</span>
                       <span className="step-label">{step.label}</span>
-                      <code className="step-command">{step.command}</code>
                     </div>
                   </div>
                   {i < steps.length - 1 && (
@@ -135,9 +134,6 @@ export default function HowItWorks() {
                 </div>
                 <h3 className="detail-title">{step.label}</h3>
                 <p className="detail-desc">{step.description}</p>
-                <code className="detail-command">
-                  <span className="cmd-prompt">$</span> {step.command}
-                </code>
               </div>
             ))}
 
