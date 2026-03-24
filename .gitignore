@@ -1,0 +1,11 @@
+.claude/
+.harnest/
+.mcp.json
+nest/**/claude/settings.local.json
+harnest-test-*/
+.DS_Store
+Thumbs.db
+*.swp
+.idea/
+.vscode/
+node_modules/

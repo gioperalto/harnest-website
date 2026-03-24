@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <defs>
+    <linearGradient id="g6" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0077B6"/>
+      <stop offset="100%" style="stop-color:#00B4D8"/>
+    </linearGradient>
+  </defs>
+  <!-- Puzzle / extensible — two interlocking pieces -->
+  <!-- Left piece -->
+  <path d="M 40,70 L 85,70 L 85,87 Q 95,80 95,95 Q 95,110 85,103 L 85,130 L 40,130 L 40,113 Q 30,120 30,105 Q 30,90 40,97 Z" fill="url(#g6)" opacity="0.9"/>
+  <!-- Right piece -->
+  <path d="M 160,70 L 115,70 L 115,87 Q 105,80 105,95 Q 105,110 115,103 L 115,130 L 160,130 L 160,113 Q 170,120 170,105 Q 170,90 160,97 Z" fill="#F4A261" opacity="0.9"/>
+  <!-- Connecting dots hint -->
+  <circle cx="100" cy="95" r="4" fill="white" opacity="0.6"/>
+  <!-- Plus symbol suggesting extension -->
+  <line x1="100" y1="148" x2="100" y2="168" stroke="#00B4D8" stroke-width="3.5" stroke-linecap="round" opacity="0.7"/>
+  <line x1="90" y1="158" x2="110" y2="158" stroke="#00B4D8" stroke-width="3.5" stroke-linecap="round" opacity="0.7"/>
+</svg>
