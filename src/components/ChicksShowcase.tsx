@@ -1,14 +1,20 @@
+import { useState } from 'react'
 import { chicksData } from '../data/chicks.generated'
 import type { ChickData } from '../data/chicks.generated'
+
+type Visibility = 'public' | 'internal'
 
 // ── Visual config (colors, emojis) for known chicks with sensible defaults ──
 
 const visualConfig: Record<string, { emoji: string; color: string; lightColor: string }> = {
   fullstack: { emoji: '🏗️', color: '#0077B6', lightColor: '#F0F7FF' },
   webpage: { emoji: '🎨', color: '#00B4D8', lightColor: '#F0FBFF' },
+  webgame: { emoji: '🎮', color: '#7B2FBE', lightColor: '#F8F0FF' },
   brainstorm: { emoji: '💡', color: '#6C63FF', lightColor: '#F5F4FF' },
   canary: { emoji: '🐤', color: '#2A9D8F', lightColor: '#F0FAF8' },
   chick: { emoji: '🥚', color: '#F4A261', lightColor: '#FFF8F0' },
+  flock: { emoji: '🐦', color: '#E63946', lightColor: '#FFF0F1' },
+  improver: { emoji: '🔧', color: '#457B9D', lightColor: '#F0F5FA' },
 }
 
 const defaultColors = [
@@ -127,6 +133,10 @@ function ChickCard({ chick, index }: { chick: ChickData; index: number }) {
 }
 
 export default function ChicksShowcase() {
+  const [visibility, setVisibility] = useState<Visibility>('public')
+
+  const filtered = chicksData.filter((c) => c.visibility === visibility)
+
   return (
     <section id="chicks" className="chicks-section">
       <div className="container">
@@ -137,10 +147,25 @@ export default function ChicksShowcase() {
             Each chick is a fully configured agent team ready to handle a specific type of work.
             More chicks hatching soon.
           </p>
+
+          <div className="chicks-toggle">
+            <button
+              className={`toggle-btn${visibility === 'public' ? ' toggle-btn--active' : ''}`}
+              onClick={() => setVisibility('public')}
+            >
+              Public
+            </button>
+            <button
+              className={`toggle-btn${visibility === 'internal' ? ' toggle-btn--active' : ''}`}
+              onClick={() => setVisibility('internal')}
+            >
+              Internal
+            </button>
+          </div>
         </div>
 
         <div className="chicks-grid">
-          {chicksData.map((chick, i) => (
+          {filtered.map((chick, i) => (
             <ChickCard key={chick.id} chick={chick} index={i} />
           ))}
         </div>
@@ -176,6 +201,38 @@ export default function ChicksShowcase() {
 
         .chicks-header .section-subtitle {
           margin: 0 auto;
+        }
+
+        .chicks-toggle {
+          display: inline-flex;
+          margin-top: 28px;
+          background: var(--bg-light);
+          border: 1px solid var(--border-light);
+          border-radius: 100px;
+          padding: 4px;
+          gap: 4px;
+        }
+
+        .toggle-btn {
+          padding: 8px 24px;
+          border-radius: 100px;
+          border: none;
+          background: transparent;
+          font-size: 0.875rem;
+          font-weight: 600;
+          color: var(--text-muted);
+          cursor: pointer;
+          transition: all var(--transition);
+        }
+
+        .toggle-btn--active {
+          background: white;
+          color: var(--text-dark);
+          box-shadow: 0 1px 4px rgba(0,0,0,0.12);
+        }
+
+        .toggle-btn:not(.toggle-btn--active):hover {
+          color: var(--text-dark);
         }
 
         .chicks-grid {

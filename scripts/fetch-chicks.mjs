@@ -37,19 +37,24 @@ function githubFetch(apiPath) {
 
 async function fetchFromGitHub() {
   console.log('Fetching chick data from GitHub API...')
-  const entries = await githubFetch('nest')
-  const dirs = entries.filter((e) => e.type === 'dir').map((e) => e.name)
+  const topEntries = await githubFetch('nest')
+  const visibilityDirs = topEntries.filter((e) => e.type === 'dir').map((e) => e.name)
 
   const chicks = []
-  for (const dir of dirs) {
-    try {
-      const file = await githubFetch(`nest/${dir}/harnest.yaml`)
-      const content = Buffer.from(file.content, 'base64').toString('utf-8')
-      const parsed = yaml.load(content)
-      chicks.push(extractChickData(dir, parsed))
-      console.log(`  ✓ ${dir}`)
-    } catch (err) {
-      console.warn(`  ⊘ ${dir}: ${err.message}`)
+  for (const visibility of visibilityDirs) {
+    if (visibility !== 'public' && visibility !== 'internal') continue
+    const entries = await githubFetch(`nest/${visibility}`)
+    const dirs = entries.filter((e) => e.type === 'dir').map((e) => e.name)
+    for (const dir of dirs) {
+      try {
+        const file = await githubFetch(`nest/${visibility}/${dir}/harnest.yaml`)
+        const content = Buffer.from(file.content, 'base64').toString('utf-8')
+        const parsed = yaml.load(content)
+        chicks.push(extractChickData(dir, parsed, visibility))
+        console.log(`  ✓ ${visibility}/${dir}`)
+      } catch (err) {
+        console.warn(`  ⊘ ${visibility}/${dir}: ${err.message}`)
+      }
     }
   }
   return chicks
@@ -63,26 +68,29 @@ function fetchFromLocal() {
     throw new Error(`Local harnest directory not found at ${LOCAL_NEST}`)
   }
 
-  const dirs = fs
-    .readdirSync(LOCAL_NEST, { withFileTypes: true })
-    .filter((d) => d.isDirectory())
-    .map((d) => d.name)
-
   const chicks = []
-  for (const dir of dirs) {
-    const yamlPath = path.join(LOCAL_NEST, dir, 'harnest.yaml')
-    if (!fs.existsSync(yamlPath)) continue
-    const content = fs.readFileSync(yamlPath, 'utf-8')
-    const parsed = yaml.load(content)
-    chicks.push(extractChickData(dir, parsed))
-    console.log(`  ✓ ${dir}`)
+  for (const visibility of ['public', 'internal']) {
+    const visDir = path.join(LOCAL_NEST, visibility)
+    if (!fs.existsSync(visDir)) continue
+    const dirs = fs
+      .readdirSync(visDir, { withFileTypes: true })
+      .filter((d) => d.isDirectory())
+      .map((d) => d.name)
+    for (const dir of dirs) {
+      const yamlPath = path.join(visDir, dir, 'harnest.yaml')
+      if (!fs.existsSync(yamlPath)) continue
+      const content = fs.readFileSync(yamlPath, 'utf-8')
+      const parsed = yaml.load(content)
+      chicks.push(extractChickData(dir, parsed, visibility))
+      console.log(`  ✓ ${visibility}/${dir}`)
+    }
   }
   return chicks
 }
 
 // ── Data extraction ─────────────────────────────────────────────────────────
 
-function extractChickData(dirName, parsed) {
+function extractChickData(dirName, parsed, visibility) {
   const agents = []
   if (parsed.agents) {
     for (const [key, value] of Object.entries(parsed.agents)) {
@@ -99,6 +107,7 @@ function extractChickData(dirName, parsed) {
     id: dirName,
     name: parsed.team?.name || dirName,
     description: (parsed.team?.description || '').trim(),
+    visibility,
     agents,
   }
 }
@@ -122,6 +131,7 @@ export interface ChickData {
   id: string
   name: string
   description: string
+  visibility: 'public' | 'internal'
   agents: ChickAgent[]
 }
 

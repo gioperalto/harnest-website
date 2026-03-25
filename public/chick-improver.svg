@@ -1,0 +1,97 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400" width="600" height="400">
+  <defs>
+    <linearGradient id="imBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0B1E2D;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#1A3A52;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#457B9D;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="imNode" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#A8D4E6"/>
+      <stop offset="100%" style="stop-color:#457B9D"/>
+    </linearGradient>
+    <filter id="imGlow">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- Card background -->
+  <rect width="600" height="400" rx="16" fill="url(#imBg)"/>
+
+  <!-- Subtle grid -->
+  <g opacity="0.05" stroke="#A8D4E6" stroke-width="1">
+    <line x1="0" y1="100" x2="600" y2="100"/>
+    <line x1="0" y1="200" x2="600" y2="200"/>
+    <line x1="0" y1="300" x2="600" y2="300"/>
+    <line x1="150" y1="0" x2="150" y2="400"/>
+    <line x1="300" y1="0" x2="300" y2="400"/>
+    <line x1="450" y1="0" x2="450" y2="400"/>
+  </g>
+
+  <!-- Sequential pipeline: 4 nodes left to right -->
+
+  <!-- Assessor (leftmost) -->
+  <circle cx="80" cy="190" r="30" fill="#F4A261" opacity="0.95" filter="url(#imGlow)"/>
+  <circle cx="80" cy="190" r="18" fill="#E76F51"/>
+  <!-- Magnifying glass icon -->
+  <circle cx="77" cy="187" r="6" fill="none" stroke="white" stroke-width="2" opacity="0.9"/>
+  <line x1="82" y1="192" x2="88" y2="198" stroke="white" stroke-width="2" stroke-linecap="round" opacity="0.9"/>
+
+  <!-- Arrow 1 -->
+  <line x1="112" y1="190" x2="178" y2="190" stroke="#A8D4E6" stroke-width="2" opacity="0.55"/>
+  <polygon points="175,185 188,190 175,195" fill="#A8D4E6" opacity="0.55"/>
+  <text x="150" y="180" text-anchor="middle" font-family="monospace" font-size="7" fill="#A8D4E6" opacity="0.4">plan</text>
+
+  <!-- Implementer -->
+  <circle cx="220" cy="190" r="30" fill="url(#imNode)" opacity="0.9" filter="url(#imGlow)"/>
+  <circle cx="220" cy="190" r="18" fill="#457B9D"/>
+  <!-- Wrench icon -->
+  <line x1="213" y1="183" x2="227" y2="197" stroke="white" stroke-width="2.5" stroke-linecap="round" opacity="0.9"/>
+  <circle cx="213" cy="183" r="4" fill="none" stroke="white" stroke-width="2" opacity="0.9"/>
+
+  <!-- Arrow 2 -->
+  <line x1="252" y1="190" x2="318" y2="190" stroke="#A8D4E6" stroke-width="2" opacity="0.55"/>
+  <polygon points="315,185 328,190 315,195" fill="#A8D4E6" opacity="0.55"/>
+  <text x="285" y="180" text-anchor="middle" font-family="monospace" font-size="7" fill="#A8D4E6" opacity="0.4">impl</text>
+
+  <!-- Validator -->
+  <circle cx="360" cy="190" r="30" fill="url(#imNode)" opacity="0.9" filter="url(#imGlow)"/>
+  <circle cx="360" cy="190" r="18" fill="#457B9D"/>
+  <!-- Checkmark icon -->
+  <polyline points="351,190 356,196 370,182" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none" opacity="0.9"/>
+
+  <!-- Arrow 3 -->
+  <line x1="392" y1="190" x2="458" y2="190" stroke="#A8D4E6" stroke-width="2" opacity="0.55"/>
+  <polygon points="455,185 468,190 455,195" fill="#A8D4E6" opacity="0.55"/>
+  <text x="425" y="180" text-anchor="middle" font-family="monospace" font-size="7" fill="#A8D4E6" opacity="0.4">ok</text>
+
+  <!-- Shipper (rightmost) -->
+  <circle cx="510" cy="190" r="30" fill="#F4A261" opacity="0.95" filter="url(#imGlow)"/>
+  <circle cx="510" cy="190" r="18" fill="#E76F51"/>
+  <!-- Ship/rocket icon -->
+  <polygon points="510,179 516,196 510,193 504,196" fill="white" opacity="0.9"/>
+  <circle cx="510" cy="200" r="2.5" fill="white" opacity="0.6"/>
+
+  <!-- PR branch arc below (decorative) -->
+  <path d="M 80 230 Q 150 280 220 270 Q 290 260 360 270 Q 430 280 510 260" fill="none" stroke="#A8D4E6" stroke-width="1.5" stroke-dasharray="5 4" opacity="0.2"/>
+
+  <!-- Branch label -->
+  <text x="295" y="300" text-anchor="middle" font-family="monospace" font-size="9" fill="#A8D4E6" opacity="0.3">patch/ branch → PR</text>
+
+  <!-- Rubric score indicator -->
+  <rect x="232" y="320" width="136" height="28" rx="6" fill="#0B1E2D" opacity="0.7"/>
+  <text x="300" y="339" text-anchor="middle" font-family="monospace" font-size="9" fill="#4ade80" opacity="0.6">rubric score ↑</text>
+
+  <!-- Node labels -->
+  <text x="80" y="236" text-anchor="middle" font-family="sans-serif" font-size="10" fill="white" opacity="0.8">Assessor</text>
+  <text x="220" y="236" text-anchor="middle" font-family="sans-serif" font-size="10" fill="white" opacity="0.8">Implementer</text>
+  <text x="360" y="236" text-anchor="middle" font-family="sans-serif" font-size="10" fill="white" opacity="0.8">Validator</text>
+  <text x="510" y="236" text-anchor="middle" font-family="sans-serif" font-size="10" fill="white" opacity="0.8">Shipper</text>
+
+  <!-- Floating decorative dots -->
+  <circle cx="50" cy="55" r="3" fill="#A8D4E6" opacity="0.3"/>
+  <circle cx="555" cy="75" r="2.5" fill="#F4A261" opacity="0.25"/>
+  <circle cx="65" cy="355" r="2" fill="#A8D4E6" opacity="0.2"/>
+  <circle cx="545" cy="345" r="2.5" fill="#F4A261" opacity="0.2"/>
+  <circle cx="310" cy="45" r="2" fill="#A8D4E6" opacity="0.3"/>
+</svg>
